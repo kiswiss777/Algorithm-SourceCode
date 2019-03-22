@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+
+
+int main()
+{
+	int n;
+	int k;
+	int coins[100];
+	int answer[10001];
+	cin >> n >> k;
+	for (int i = 0; i < n; i++) {
+		cin >> coins[i];
+	}
+	answer[0] = 0;
+	for (int i = 1; i <= k; i++) { // 총까지 계속해서 확인하면서 초기화
+
+		int min = 10001;
+		for (int j = 0; j < n; j++) {
+			if (i - coins[j] < 0) continue;       
+			else {
+				if (answer[i - coins[j]] + 1 < min) {   
+					min = answer[i - coins[j]] + 1;
+				}
+			}
+		}
+		if (answer[i]!=10001)
+			answer[i] = min;
+		else
+			answer[i] = -1;     
+	}
+
+	cout << answer[k];
+	return 0;
+}
