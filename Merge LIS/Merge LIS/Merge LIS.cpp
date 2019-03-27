@@ -9,29 +9,26 @@ using namespace std;
 
 
 int n, m, A[100], B[100];
-const long long NEGINF = numeric_limits<long long>::min();
+const long long NEGINF = numeric_limits<long long>::min(); //최소표현 가능한 int를 리턴
 int cache[101][101];
 //min(A[indexA],B[indexB]),max(A[indexA],B[indexB])로 시작하는
-//합친 증가 부분 수열의 최대 길이를 반환하낟.
-//단 indexA==indexB==-1 혹은 A[indexA] !=B[indexB] 라고 가정한다.
+//합친 증가 부분 수열의 최대 길이를 반효ㅑㄴ.
 
-int jlis(int indexA, int indexB) {
-	//메모제이션
-	int &ret = cache[indexA + 1][indexB + 1];
-	if (ret != -1) return ret;
-	//A[indexA],B[indexB]가 이미 존재하므로 2개는 항상 있다.
-	ret = 2;
-	long long a = (indexA == -1 ? NEGINF : A[indexA]);
-	long long b = (indexB == -1 ? NEGINF : B[indexB]);
+int JLIS(int indexA, int indexB) {
+	int len = cache[indexA + 1][indexB + 1];
+	if (len != -1) return len; // 인덱스가 존재하지안으면 리턴
+	len = 2;//항상 최소 2의 길이는 가진다
+	long long a = (indexA == -1 ? NEGINF : A[indexA]); // 처음에 들어왓을떄 최소값을 주기위함
+	long long b = (indexB == -1 ? NEGINF : B[indexB]); // 처음에 들어왓을떄 최소값을 주기위함
 	long long maxElement = max(a, b);
 	//다음 원소를 찾는다.
 	for (int nextA = indexA + 1; nextA < n; nextA++)
 		if (maxElement < A[nextA])
-			ret = max(ret, jlis(nextA, indexB) + 1);
+			len = max(len, JLIS(nextA, indexB) + 1);
 	for (int nextB = indexB + 1; nextB < m; nextB++)
 		if (maxElement < B[nextB])
-			ret = max(ret, jlis(indexA, nextB) + 1);
-	return ret;
+			len = max(len, JLIS(indexA, nextB) + 1);
+	return len;
 }
 
 
@@ -47,7 +44,7 @@ int main(void) {
 			cin >> A[i];
 		for (int j = 0; j < m; j++)
 			cin >> B[j];
-		cout << jlis(-1, -1) - 2 << endl;
+		cout << JLIS(-1, -1) - 2 << endl;
 	}
 
 
