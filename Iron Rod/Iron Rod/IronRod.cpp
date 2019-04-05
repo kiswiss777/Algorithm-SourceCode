@@ -20,5 +20,5 @@ int solution(string arr) {
 				answer++;
 		}
 	}
-	return answer;
+	return answer; // Á¤´ä
 }
