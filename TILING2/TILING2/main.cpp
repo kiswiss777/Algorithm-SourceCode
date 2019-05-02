@@ -7,9 +7,7 @@ using namespace std;
 
 int main(void) {
 	vector<int> answer; // 정답을 담을 배열
-	int square[101] = { 0, }; // 사각형 N마다 가능한 경우의 수
-	square[1] = 1; // 1 = 1
-	square[2] = 2; // 2 = 2
+	int square[101] = { 0,1,2, }; // 사각형 N마다 가능한 경우의 수
 	int testcase, N;
 	cin >> testcase;
 	for (int i = 0; i < testcase; i++) {
