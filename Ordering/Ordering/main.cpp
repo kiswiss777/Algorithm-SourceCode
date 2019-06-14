@@ -6,16 +6,16 @@ using namespace std;
 
 vector<int> korea, russia,answer;
 
-int getAnswer(int player_num)
+int getAnswer(int player_num)//매개변수 굳이 필요없고
 {
-	int r_index = 0, k_index, start = 0;
+	int r_index = 0, k_index, start = 0; // multiset 알아보기
 	int answer = 0;
 	while (r_index < player_num) {
 		k_index = player_num;
 		for (int i = start; i < player_num; i++) {
-			if (russia[r_index] <= korea[i]) {
-				if (k_index > i)
-					k_index = i;
+			if (russia[r_index] <= korea[i]) { // 굳이 다돌필요없다.(while 거꾸로)
+				if (k_index > i) 
+					k_index = i; // lowerbound
 			}
 		}
 		if (k_index != player_num) {
@@ -24,8 +24,8 @@ int getAnswer(int player_num)
 		}
 		else
 			start++;
-
 		r_index++;
+
 	}
 	return answer;
 }
